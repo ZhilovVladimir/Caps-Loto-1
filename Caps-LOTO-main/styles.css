@@ -1,0 +1,816 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000000;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+.title {
+    font-family: 'Russo One', sans-serif;
+    color: #ffffff;
+    font-size: clamp(2rem, 8vw, 4rem);
+    text-align: center;
+    padding-top: clamp(1rem, 4vh, 2rem);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
+        0 0 20px rgba(255, 255, 255, 0.3),
+        0 0 30px rgba(255, 255, 255, 0.2);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-bottom: 2rem;
+}
+
+.title:hover {
+    transform: rotate(-5deg) scale(1.1);
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8),
+        0 0 25px rgba(255, 255, 255, 0.6),
+        0 0 35px rgba(255, 255, 255, 0.4);
+    animation: pulse 1.5s infinite;
+}
+
+.tables-container {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 1rem;
+    justify-content: center;
+    padding: 0.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.tables-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
+}
+
+.table-pair-wrapper {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.2) 0%,
+            rgba(255, 255, 255, 0.15) 100%);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.table-pair-wrapper:hover {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.25) 0%,
+            rgba(255, 255, 255, 0.2) 100%);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.table-number {
+    position: absolute;
+    top: -5px;
+    color: #4d94ff;
+    font-size: 0.75rem;
+    font-family: 'Russo One', sans-serif;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 2px 6px;
+    border-radius: 3px;
+    text-shadow: 0 0 3px rgba(77, 148, 255, 0.3);
+    letter-spacing: 0.03em;
+    font-weight: normal;
+    border: 1px solid rgba(77, 148, 255, 0.2);
+    box-shadow: 0 0 8px rgba(77, 148, 255, 0.1);
+}
+
+.table-number.left {
+    left: 10px;
+}
+
+.table-number.right {
+    right: 10px;
+}
+
+.number-table {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background-color: #333;
+    padding: 1px;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 150px;
+}
+
+.number-cell {
+    background-color: white;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.number-cell:hover {
+    background-color: #ddd;
+    transform: scale(1.1);
+    z-index: 1;
+}
+
+.number-cell.selected {
+    background-color: #4CAF50;
+    color: white;
+}
+
+@keyframes pulse {
+    0% {
+        transform: rotate(-5deg) scale(1.1);
+    }
+
+    50% {
+        transform: rotate(-3deg) scale(1.15);
+    }
+
+    100% {
+        transform: rotate(-5deg) scale(1.1);
+    }
+}
+
+/* Мобильные устройства */
+@media screen and (max-width: 480px) {
+    .title {
+        letter-spacing: 0.1em;
+        padding-top: 1rem;
+    }
+
+    .number-cell {
+        font-size: 0.8rem;
+    }
+
+    .tables-container {
+        gap: 0.3rem;
+    }
+
+    .number-table {
+        max-width: 120px;
+    }
+}
+
+/* Планшеты */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .title {
+        letter-spacing: 0.15em;
+        padding-top: 1.5rem;
+    }
+
+    .number-table {
+        max-width: 130px;
+    }
+}
+
+/* Ландшафтная ориентация */
+@media screen and (max-height: 480px) {
+    .title {
+        padding-top: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .tables-container {
+        gap: 0.3rem;
+    }
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: #333;
+}
+
+.task-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.task-list {
+    background-color: white;
+    border-radius: 4px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.task-item:last-child {
+    border-bottom: none;
+}
+
+.delete-btn {
+    background-color: #ff4444;
+    padding: 5px 10px;
+}
+
+.delete-btn:hover {
+    background-color: #cc0000;
+}
+
+/* Позиции для фоновых карточек */
+.background-card:nth-child(1) {
+    top: 0;
+}
+
+.background-card:nth-child(2) {
+    top: 20%;
+}
+
+.background-card:nth-child(3) {
+    top: 40%;
+}
+
+.background-card:nth-child(4) {
+    top: 60%;
+}
+
+.background-card:nth-child(5) {
+    top: 80%;
+}
+
+.table-number-bottom {
+    position: absolute;
+    bottom: -8px;
+    left: 10px;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.7rem;
+    font-family: 'Russo One', sans-serif;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1px 4px;
+    border-radius: 2px;
+}
+
+.reset-button {
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(135deg, #ff4d4d 0%, #e60000 100%);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-family: 'Russo One', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 2px 10px rgba(255, 77, 77, 0.2);
+}
+
+.reset-button:hover {
+    background: linear-gradient(135deg, #ff6666 0%, #ff0000 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3);
+}
+
+.reset-button:active {
+    transform: translateY(1px);
+    background: linear-gradient(135deg, #e60000 0%, #cc0000 100%);
+}
+
+.reset-button::before {
+    content: '🔄';
+    margin-right: 8px;
+    font-size: 1.2em;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid rgba(77, 148, 255, 0.2);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.modal-text {
+    color: white;
+    font-family: 'Russo One', sans-serif;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.modal-button {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Russo One', sans-serif;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-button.confirm {
+    background: linear-gradient(135deg, #4d94ff 0%, #2b6cc4 100%);
+    color: white;
+}
+
+.modal-button.cancel {
+    background: linear-gradient(135deg, #ff4d4d 0%, #c42b2b 100%);
+    color: white;
+}
+
+.modal-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Стили для статистики */
+.statistics-container {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.chart-section {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.5rem;
+    height: 200px;
+}
+
+.chart-section canvas {
+    max-height: 150px !important;
+}
+
+.chart-title {
+    color: #ffffff;
+    font-family: 'Russo One', sans-serif;
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.prediction-section {
+    display: none;
+}
+
+/* Стили для таблицы предсказаний */
+.prediction-pair {
+    background: linear-gradient(135deg,
+            rgba(77, 148, 255, 0.2) 0%,
+            rgba(77, 148, 255, 0.15) 100%) !important;
+    border: 1px solid rgba(77, 148, 255, 0.3) !important;
+    position: relative;
+}
+
+.prediction-pair::before {
+    content: 'Предсказание на следующий тираж';
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #4d94ff;
+    font-family: 'Russo One', sans-serif;
+    font-size: 0.9rem;
+    text-shadow: 0 0 5px rgba(77, 148, 255, 0.3);
+    white-space: nowrap;
+}
+
+.prediction-table-left,
+.prediction-table-right {
+    position: relative;
+    border: 2px solid rgba(77, 148, 255, 0.3);
+    box-shadow: 0 0 15px rgba(77, 148, 255, 0.2);
+}
+
+.prediction-table-left .number-cell,
+.prediction-table-right .number-cell {
+    cursor: default;
+}
+
+.number-cell.predicted {
+    background-color: rgba(77, 148, 255, 0.3);
+    color: #ffffff;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    animation: pulse-prediction 2s infinite;
+}
+
+@keyframes pulse-prediction {
+    0% {
+        background-color: rgba(77, 148, 255, 0.3);
+    }
+
+    50% {
+        background-color: rgba(77, 148, 255, 0.5);
+        transform: scale(1.1);
+    }
+
+    100% {
+        background-color: rgba(77, 148, 255, 0.3);
+    }
+}
+
+.prediction-pair .table-number {
+    background: rgba(77, 148, 255, 0.3) !important;
+    border-color: rgba(77, 148, 255, 0.4) !important;
+}
+
+/* Медиа-запросы для предсказаний */
+@media screen and (max-width: 768px) {
+
+    .prediction-table-left,
+    .prediction-table-right {
+        border-width: 1px;
+    }
+
+    .prediction-pair::before {
+        font-size: 0.8rem;
+        top: -20px;
+    }
+}
+
+/* Медиа-запросы для статистики */
+@media screen and (max-width: 768px) {
+    .chart-section {
+        height: 180px;
+    }
+
+    .chart-section canvas {
+        max-height: 130px !important;
+    }
+
+    .chart-title {
+        font-size: 0.8rem;
+    }
+}
+
+/* Стили для кнопок */
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 1rem auto;
+    max-width: 300px;
+    padding: 0 1rem;
+}
+
+.predict-button {
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-family: 'Russo One', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 2px 10px rgba(76, 175, 80, 0.2);
+}
+
+.predict-button:hover {
+    background: linear-gradient(135deg, #45a049 0%, #388e3c 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.predict-button:active,
+.predict-button.predict-button-active {
+    transform: translateY(1px);
+    background: linear-gradient(135deg, #388e3c 0%, #2e7d32 100%);
+}
+
+.predict-button::before {
+    content: '🎲';
+    margin-right: 8px;
+    font-size: 1.2em;
+}
+
+/* Анимация для активной кнопки предсказания */
+@keyframes predict-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+    }
+}
+
+.predict-button-active {
+    animation: predict-pulse 0.5s ease-out;
+}
+
+/* Медиа-запросы для кнопок */
+@media screen and (max-width: 768px) {
+    .buttons-container {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0 1rem;
+    }
+
+    .predict-button,
+    .reset-button {
+        width: 100%;
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+.predict-button-disabled {
+    background: linear-gradient(135deg, #808080 0%, #666666 100%) !important;
+    cursor: not-allowed !important;
+    opacity: 0.7;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.predict-button-disabled:hover {
+    background: linear-gradient(135deg, #808080 0%, #666666 100%) !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.predict-button-disabled::before {
+    opacity: 0.7;
+}
+
+/* Стили для кнопки анализа */
+.analyze-button {
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-family: 'Russo One', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: 0 2px 10px rgba(156, 39, 176, 0.2);
+    margin-top: 0.5rem;
+    width: 100%;
+}
+
+.analyze-button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #AB47BC 0%, #8E24AA 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3);
+}
+
+.analyze-button:active:not(:disabled) {
+    transform: translateY(1px);
+    background: linear-gradient(135deg, #8E24AA 0%, #6A1B9A 100%);
+}
+
+.analyze-button::before {
+    content: '📊';
+    margin-right: 8px;
+    font-size: 1.2em;
+}
+
+.analyze-button:disabled {
+    background: linear-gradient(135deg, #9E9E9E 0%, #757575 100%);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Стили для окна анализа */
+.analysis-modal .modal {
+    max-width: 500px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+    padding: 2rem;
+}
+
+.analysis-modal h3 {
+    color: #9C27B0;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(156, 39, 176, 0.3);
+}
+
+.analysis-results {
+    text-align: left;
+    margin: 1rem 0;
+}
+
+.analysis-results p {
+    margin: 0.5rem 0;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.recommendation {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(156, 39, 176, 0.1);
+    border-radius: 4px;
+    border: 1px solid rgba(156, 39, 176, 0.2);
+    color: #E1BEE7;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Убираем ненужные стили статистики */
+.statistics-container {
+    display: none;
+}
+
+/* Стили для секции анализа */
+.analysis-section {
+    display: none;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.9) 100%);
+    border-radius: 8px;
+    border: 1px solid rgba(156, 39, 176, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.analysis-content {
+    color: #fff;
+}
+
+.analysis-content h3 {
+    color: #9C27B0;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(156, 39, 176, 0.3);
+}
+
+.analysis-content h4 {
+    color: #E1BEE7;
+    font-size: 1rem;
+    margin: 1rem 0 0.5rem;
+}
+
+.match-details {
+    background: rgba(156, 39, 176, 0.1);
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 4px;
+    border: 1px solid rgba(156, 39, 176, 0.2);
+}
+
+.match-details p {
+    margin: 0.3rem 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+}
+
+.accuracy-info {
+    text-align: center;
+    margin: 1rem 0;
+    padding: 0.5rem;
+    background: rgba(76, 175, 80, 0.1);
+    border-radius: 4px;
+    border: 1px solid rgba(76, 175, 80, 0.2);
+}
+
+.accuracy-info p {
+    color: #81C784;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+.accuracy-info .accuracy-explanation {
+    color: #A5D6A7;
+    font-size: 0.9rem;
+    font-weight: normal;
+    font-style: italic;
+}
+
+.recommendation {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(33, 33, 33, 0.5);
+    border-radius: 4px;
+    border: 1px solid rgba(156, 39, 176, 0.2);
+}
+
+.recommendation h4 {
+    color: #9C27B0;
+    margin-bottom: 0.5rem;
+}
+
+.recommendation p {
+    color: #E1BEE7;
+    margin: 0.5rem 0;
+}
+
+.recommendation ul {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+    color: #E1BEE7;
+}
+
+.recommendation li {
+    margin: 0.3rem 0;
+    font-size: 0.9rem;
+}
+
+/* Медиа-запросы для секции анализа */
+@media screen and (max-width: 768px) {
+    .analysis-section {
+        margin: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .analysis-content h3 {
+        font-size: 1rem;
+    }
+
+    .match-details,
+    .recommendation {
+        padding: 0.5rem;
+    }
+
+    .match-details p,
+    .recommendation li {
+        font-size: 0.8rem;
+    }
+}
